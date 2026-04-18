@@ -19,6 +19,10 @@ public class CarroService {
         return carroRepository.findAll();
     }
 
+    public Carro buscarCarroPlaca(String placa) {
+        return carroRepository.findByPlaca(placa);
+    }
+
     public Carro cadastrarCarro(Carro carro) {
         carro.setStatus(StatusCarro.DISPONIVEL);
         return carroRepository.save(carro);

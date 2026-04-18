@@ -23,6 +23,12 @@ public class CarroController {
         return carroService.listarCarros();
     }
 
+    @GetMapping({"/{placa}"})
+    public ResponseEntity<Carro> buscarCarroPlaca(@PathVariable String placa) {
+        Carro carroPlaca = carroService.buscarCarroPlaca(placa);
+        return new ResponseEntity<>(carroPlaca, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Carro> cadastrarCarro (@RequestBody Carro carro) {
         Carro carroCriado = carroService.cadastrarCarro(carro);
