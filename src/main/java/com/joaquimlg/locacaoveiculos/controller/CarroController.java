@@ -24,7 +24,6 @@ public class CarroController {
     }
 
     @PostMapping
-    @RequestMapping("/cadastrar")
     public ResponseEntity<Carro> cadastrarCarro (@RequestBody Carro carro) {
         Carro carroCriado = carroService.cadastrarCarro(carro);
         return new ResponseEntity<>(carroCriado, HttpStatus.CREATED);
