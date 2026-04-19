@@ -52,4 +52,21 @@ public class CarroService {
             throw new RuntimeException("Veículo não encontrado");
         }
     }
+
+    public Carro inativarCarro(Long id) {
+        Optional<Carro> carroBuscado = carroRepository.findById(id);
+
+        if (carroBuscado.isPresent()) {
+            Carro carroRemovido = carroBuscado.get();
+
+            carroRemovido.setStatus(StatusCarro.INATIVO);
+
+            carroRepository.save(carroRemovido);
+
+            return carroRemovido;
+        }
+        else {
+            throw new RuntimeException("Veículo não encontrado");
+        }
+    }
 }

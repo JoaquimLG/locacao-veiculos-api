@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/veiculos")
@@ -43,5 +42,12 @@ public class CarroController {
         Carro carroAtualizado = carroService.atualizarParcialCarro(id, carro);
 
         return new ResponseEntity<>(carroAtualizado, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Carro> inativarCarro (@PathVariable Long id) {
+        Carro carroRemovido = carroService.inativarCarro(id);
+
+        return new ResponseEntity<>(carroRemovido, HttpStatus.OK);
     }
 }
