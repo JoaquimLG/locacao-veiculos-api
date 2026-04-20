@@ -16,7 +16,11 @@ public class CarroService {
         this.carroRepository = carroRepository;
     }
 
-    public List<Carro> listarCarros() {
+    public List<Carro> listarCarros(StatusCarro status) {
+        if (status != null) {
+            return carroRepository.findByStatus(status);
+        }
+
         return carroRepository.findAll();
     }
 

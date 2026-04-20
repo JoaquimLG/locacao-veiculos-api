@@ -1,6 +1,7 @@
 package com.joaquimlg.locacaoveiculos.controller;
 
 import com.joaquimlg.locacaoveiculos.database.model.Carro;
+import com.joaquimlg.locacaoveiculos.database.model.StatusCarro;
 import com.joaquimlg.locacaoveiculos.service.CarroService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,9 @@ public class CarroController {
     }
 
     @GetMapping
-    public List<Carro> listarCarros() {
-        return carroService.listarCarros();
+    public List<Carro> listarCarros(
+            @RequestParam (required = false) StatusCarro status) {
+        return carroService.listarCarros(status);
     }
 
     @GetMapping("/placa/{placa}")
