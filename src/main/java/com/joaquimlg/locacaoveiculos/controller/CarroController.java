@@ -2,8 +2,10 @@ package com.joaquimlg.locacaoveiculos.controller;
 
 import com.joaquimlg.locacaoveiculos.database.model.Carro;
 import com.joaquimlg.locacaoveiculos.database.model.StatusCarro;
-import com.joaquimlg.locacaoveiculos.dto.CarroDto;
+import com.joaquimlg.locacaoveiculos.dto.CarroCreateDto;
+import com.joaquimlg.locacaoveiculos.dto.CarroUpdateDto;
 import com.joaquimlg.locacaoveiculos.service.CarroService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,14 +36,14 @@ public class CarroController {
     }
 
     @PostMapping
-    public ResponseEntity<Carro> cadastrarCarro (@RequestBody CarroDto carro) {
+    public ResponseEntity<Carro> cadastrarCarro (@RequestBody @Valid CarroCreateDto carro) {
         Carro carroCriado = carroService.cadastrarCarro(carro);
 
         return new ResponseEntity<>(carroCriado, HttpStatus.CREATED);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Carro> atualizarParcialCarro (@PathVariable Long id, @RequestBody CarroDto carro) {
+    public ResponseEntity<Carro> atualizarParcialCarro (@PathVariable Long id, @RequestBody @Valid CarroUpdateDto carro) {
         Carro carroAtualizado = carroService.atualizarParcialCarro(id, carro);
 
         return new ResponseEntity<>(carroAtualizado, HttpStatus.OK);

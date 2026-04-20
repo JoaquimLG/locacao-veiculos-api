@@ -3,7 +3,8 @@ package com.joaquimlg.locacaoveiculos.service;
 import com.joaquimlg.locacaoveiculos.database.model.Carro;
 import com.joaquimlg.locacaoveiculos.database.model.StatusCarro;
 import com.joaquimlg.locacaoveiculos.database.repository.CarroRepository;
-import com.joaquimlg.locacaoveiculos.dto.CarroDto;
+import com.joaquimlg.locacaoveiculos.dto.CarroCreateDto;
+import com.joaquimlg.locacaoveiculos.dto.CarroUpdateDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class CarroService {
         return carroRepository.findByPlaca(placa);
     }
 
-    public Carro cadastrarCarro(CarroDto carro) {
+    public Carro cadastrarCarro(CarroCreateDto carro) {
         Carro carroNovo = Carro.builder()
                 .placa(carro.getPlaca())
                 .marca(carro.getMarca())
@@ -43,7 +44,7 @@ public class CarroService {
         return carroRepository.save(carroNovo);
     }
 
-    public Carro atualizarParcialCarro(Long id, CarroDto carroAtualizacoes) {
+    public Carro atualizarParcialCarro(Long id, CarroUpdateDto carroAtualizacoes) {
         Optional<Carro> carroBuscadoId = carroRepository.findById(id);
 
         if (carroBuscadoId.isPresent()) {

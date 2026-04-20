@@ -1,6 +1,8 @@
 package com.joaquimlg.locacaoveiculos.dto;
 
-import com.joaquimlg.locacaoveiculos.database.model.StatusCarro;
+import jakarta.validation.constraints.NegativeOrZero;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,11 +10,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CarroDto {
+public class CarroCreateDto {
+    @NotBlank
     private String placa;
+    @NotBlank
     private String marca;
+    @NotBlank
     private String modelo;
-    private StatusCarro status;
+    @Positive
     private double valorCarro;
 
 }
