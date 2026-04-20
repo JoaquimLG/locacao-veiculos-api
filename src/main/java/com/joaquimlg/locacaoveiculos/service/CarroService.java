@@ -54,7 +54,7 @@ public class CarroService {
                 carroAtualizado.setStatus(carroAtualizacoes.getStatus());
             }
 
-            if (carroAtualizacoes.getValorCarro() != 0.0) {
+            if (carroAtualizacoes.getValorCarro() != null) {
                 carroAtualizado.setValorCarro(carroAtualizacoes.getValorCarro());
             }
 

@@ -1,6 +1,5 @@
 package com.joaquimlg.locacaoveiculos.dto;
 
-import jakarta.validation.constraints.NegativeOrZero;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
@@ -18,8 +17,6 @@ public class CarroCreateDto {
     @NotBlank
     private String modelo;
     @Positive
-    private double valorCarro;
+    private Double valorCarro;
 
 }
-
-
