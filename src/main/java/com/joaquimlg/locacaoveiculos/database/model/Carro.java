@@ -1,13 +1,13 @@
 package com.joaquimlg.locacaoveiculos.database.model;
 
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
+@Builder
 @Entity
 @Table(name = "carros")
 

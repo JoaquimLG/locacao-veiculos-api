@@ -2,6 +2,7 @@ package com.joaquimlg.locacaoveiculos.controller;
 
 import com.joaquimlg.locacaoveiculos.database.model.Carro;
 import com.joaquimlg.locacaoveiculos.database.model.StatusCarro;
+import com.joaquimlg.locacaoveiculos.dto.CarroDto;
 import com.joaquimlg.locacaoveiculos.service.CarroService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,14 +34,14 @@ public class CarroController {
     }
 
     @PostMapping
-    public ResponseEntity<Carro> cadastrarCarro (@RequestBody Carro carro) {
+    public ResponseEntity<Carro> cadastrarCarro (@RequestBody CarroDto carro) {
         Carro carroCriado = carroService.cadastrarCarro(carro);
 
         return new ResponseEntity<>(carroCriado, HttpStatus.CREATED);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Carro> atualizarParcialCarro (@PathVariable Long id, @RequestBody Carro carro) {
+    public ResponseEntity<Carro> atualizarParcialCarro (@PathVariable Long id, @RequestBody CarroDto carro) {
         Carro carroAtualizado = carroService.atualizarParcialCarro(id, carro);
 
         return new ResponseEntity<>(carroAtualizado, HttpStatus.OK);

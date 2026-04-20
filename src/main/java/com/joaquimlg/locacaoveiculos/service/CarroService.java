@@ -3,10 +3,13 @@ package com.joaquimlg.locacaoveiculos.service;
 import com.joaquimlg.locacaoveiculos.database.model.Carro;
 import com.joaquimlg.locacaoveiculos.database.model.StatusCarro;
 import com.joaquimlg.locacaoveiculos.database.repository.CarroRepository;
+import com.joaquimlg.locacaoveiculos.dto.CarroDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.joaquimlg.locacaoveiculos.database.model.StatusCarro.DISPONIVEL;
 
 @Service
 public class CarroService {
@@ -28,12 +31,19 @@ public class CarroService {
         return carroRepository.findByPlaca(placa);
     }
 
-    public Carro cadastrarCarro(Carro carro) {
-        carro.setStatus(StatusCarro.DISPONIVEL);
-        return carroRepository.save(carro);
+    public Carro cadastrarCarro(CarroDto carro) {
+        Carro carroNovo = Carro.builder()
+                .placa(carro.getPlaca())
+                .marca(carro.getMarca())
+                .modelo(carro.getModelo())
+                .status(DISPONIVEL)
+                .valorCarro(carro.getValorCarro())
+                .build();
+
+        return carroRepository.save(carroNovo);
     }
 
-    public Carro atualizarParcialCarro(Long id, Carro carroAtualizacoes) {
+    public Carro atualizarParcialCarro(Long id, CarroDto carroAtualizacoes) {
         Optional<Carro> carroBuscadoId = carroRepository.findById(id);
 
         if (carroBuscadoId.isPresent()) {
@@ -63,11 +73,17 @@ public class CarroService {
         if (carroBuscado.isPresent()) {
             Carro carroRemovido = carroBuscado.get();
 
-            carroRemovido.setStatus(StatusCarro.INATIVO);
+            if (carroRemovido.getStatus() != StatusCarro.ALUGADO) {
+                carroRemovido.setStatus(StatusCarro.INATIVO);
 
-            carroRepository.save(carroRemovido);
+                carroRepository.save(carroRemovido);
 
-            return carroRemovido;
+                return carroRemovido;
+            }
+
+            else {
+                throw new RuntimeException("Não é possível remover carro alugado!");
+            }
         }
         else {
             throw new RuntimeException("Veículo não encontrado");
