@@ -21,7 +21,7 @@ public class CarroService {
             return carroRepository.findByStatus(status);
         }
 
-        return carroRepository.findAll();
+        return carroRepository.findByStatusNot(StatusCarro.INATIVO);
     }
 
     public Carro buscarCarroPlaca(String placa) {

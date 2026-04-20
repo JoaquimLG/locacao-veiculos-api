@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface CarroRepository extends JpaRepository<Carro, Long> {
 
+    List<Carro> findByStatusNot(StatusCarro statusCarro);
+
     List<Carro> findByStatus(StatusCarro statusCarro);
 
     Carro findByPlaca(String placa);
