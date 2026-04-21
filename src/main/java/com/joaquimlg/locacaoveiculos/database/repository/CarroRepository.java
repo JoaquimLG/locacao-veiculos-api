@@ -5,6 +5,7 @@ import com.joaquimlg.locacaoveiculos.database.model.StatusCarro;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CarroRepository extends JpaRepository<Carro, Long> {
 
@@ -12,7 +13,7 @@ public interface CarroRepository extends JpaRepository<Carro, Long> {
 
     List<Carro> findByStatus(StatusCarro statusCarro);
 
-    Carro findByPlaca(String placa);
+    Optional<Carro> findByPlaca(String placa);
 
     boolean existsByPlaca(String placa);
 }

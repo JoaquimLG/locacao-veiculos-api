@@ -21,6 +21,7 @@ public class CarroService {
     }
 
     public List<Carro> listarCarros(StatusCarro status) {
+        //Verifica status para definir o filtro da lista
         if (status != null) {
             return carroRepository.findByStatus(status);
         }
@@ -29,7 +30,13 @@ public class CarroService {
     }
 
     public Carro buscarCarroPlaca(String placa) {
-        return carroRepository.findByPlaca(placa);
+        Optional<Carro> carroBuscadoPlaca = carroRepository.findByPlaca(placa);
+
+        if (carroBuscadoPlaca.isPresent()) {
+            return carroBuscadoPlaca.get();
+        }
+
+        throw new RuntimeException("Veículo não encontrado");
     }
 
     public Carro cadastrarCarro(CarroCreateDto carro) {
@@ -41,7 +48,7 @@ public class CarroService {
                     .placa(carro.getPlaca())
                     .marca(carro.getMarca())
                     .modelo(carro.getModelo())
-                    .status(DISPONIVEL)
+                    .status(DISPONIVEL) //Status do carro é inicializado como disponível
                     .valorCarro(carro.getValorCarro())
                     .build();
 
@@ -65,6 +72,7 @@ public class CarroService {
                 carroAtualizado.setValorCarro(carroAtualizacoes.getValorCarro());
             }
 
+            //Salva as novas alterações
             carroRepository.save(carroAtualizado);
 
             return carroAtualizado;
@@ -82,6 +90,7 @@ public class CarroService {
             if (carroRemovido.getStatus() != StatusCarro.ALUGADO) {
                 carroRemovido.setStatus(StatusCarro.INATIVO);
 
+                //Salva as novas alterações
                 carroRepository.save(carroRemovido);
 
                 return carroRemovido;
