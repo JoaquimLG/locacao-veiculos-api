@@ -33,15 +33,22 @@ public class CarroService {
     }
 
     public Carro cadastrarCarro(CarroCreateDto carro) {
-        Carro carroNovo = Carro.builder()
-                .placa(carro.getPlaca())
-                .marca(carro.getMarca())
-                .modelo(carro.getModelo())
-                .status(DISPONIVEL)
-                .valorCarro(carro.getValorCarro())
-                .build();
 
-        return carroRepository.save(carroNovo);
+        boolean placaExistente = existePlacaCadastrada(carro.getPlaca());
+
+        if (!placaExistente) {
+            Carro carroNovo = Carro.builder()
+                    .placa(carro.getPlaca())
+                    .marca(carro.getMarca())
+                    .modelo(carro.getModelo())
+                    .status(DISPONIVEL)
+                    .valorCarro(carro.getValorCarro())
+                    .build();
+
+            return carroRepository.save(carroNovo);
+        }
+
+        throw new RuntimeException("Placa já cadastrada");
     }
 
     public Carro atualizarParcialCarro(Long id, CarroUpdateDto carroAtualizacoes) {
@@ -63,9 +70,7 @@ public class CarroService {
             return carroAtualizado;
         }
 
-        else {
-            throw new RuntimeException("Veículo não encontrado");
-        }
+        throw new RuntimeException("Veículo não encontrado");
     }
 
     public Carro inativarCarro(Long id) {
@@ -82,12 +87,13 @@ public class CarroService {
                 return carroRemovido;
             }
 
-            else {
-                throw new RuntimeException("Não é possível remover carro alugado!");
-            }
+            throw new RuntimeException("Não é possível remover carro alugado!");
         }
-        else {
-            throw new RuntimeException("Veículo não encontrado");
-        }
+
+        throw new RuntimeException("Veículo não encontrado");
+    }
+
+    private boolean existePlacaCadastrada(String placa) {
+        return carroRepository.existsByPlaca(placa);
     }
 }
