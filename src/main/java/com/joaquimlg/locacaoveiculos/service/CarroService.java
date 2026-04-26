@@ -5,6 +5,7 @@ import com.joaquimlg.locacaoveiculos.database.model.StatusCarro;
 import com.joaquimlg.locacaoveiculos.database.repository.CarroRepository;
 import com.joaquimlg.locacaoveiculos.dto.CarroCreateDto;
 import com.joaquimlg.locacaoveiculos.dto.CarroUpdateDto;
+import com.joaquimlg.locacaoveiculos.exception.PlacaDuplicadaException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -55,7 +56,7 @@ public class CarroService {
             return carroRepository.save(carroNovo);
         }
 
-        throw new RuntimeException("Placa já cadastrada");
+        throw new PlacaDuplicadaException("Placa já cadastrada");
     }
 
     public Carro atualizarParcialCarro(Long id, CarroUpdateDto carroAtualizacoes) {
