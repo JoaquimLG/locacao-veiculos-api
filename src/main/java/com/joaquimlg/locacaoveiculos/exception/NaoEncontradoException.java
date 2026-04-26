@@ -1,0 +1,7 @@
+package com.joaquimlg.locacaoveiculos.exception;
+
+public class NaoEncontradoException extends RuntimeException {
+    public NaoEncontradoException(String mensagem) {
+        super(mensagem);
+    }
+}

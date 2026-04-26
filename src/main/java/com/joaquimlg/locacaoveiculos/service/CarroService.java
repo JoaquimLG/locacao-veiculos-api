@@ -5,6 +5,7 @@ import com.joaquimlg.locacaoveiculos.database.model.StatusCarro;
 import com.joaquimlg.locacaoveiculos.database.repository.CarroRepository;
 import com.joaquimlg.locacaoveiculos.dto.CarroCreateDto;
 import com.joaquimlg.locacaoveiculos.dto.CarroUpdateDto;
+import com.joaquimlg.locacaoveiculos.exception.NaoEncontradoException;
 import com.joaquimlg.locacaoveiculos.exception.PlacaDuplicadaException;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,7 @@ public class CarroService {
             return carroBuscadoPlaca.get();
         }
 
-        throw new RuntimeException("Veículo não encontrado");
+        throw new NaoEncontradoException("Veículo não encontrado");
     }
 
     public Carro cadastrarCarro(CarroCreateDto carro) {
@@ -79,7 +80,7 @@ public class CarroService {
             return carroAtualizado;
         }
 
-        throw new RuntimeException("Veículo não encontrado");
+        throw new NaoEncontradoException("Veículo não encontrado");
     }
 
     public Carro inativarCarro(Long id) {
@@ -100,7 +101,7 @@ public class CarroService {
             throw new RuntimeException("Não é possível remover carro alugado!");
         }
 
-        throw new RuntimeException("Veículo não encontrado");
+        throw new NaoEncontradoException("Veículo não encontrado");
     }
 
     private boolean existePlacaCadastrada(String placa) {
