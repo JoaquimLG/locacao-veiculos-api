@@ -1,4 +1,4 @@
-package com.joaquimlg.locacaoveiculos.exception;
+package com.joaquimlg.locacaoveiculos.dto;
 
 import lombok.*;
 import org.springframework.http.HttpStatus;
@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 @Setter
 @AllArgsConstructor
 @Builder
-public class ErrorResponse {
+public class ErrorResponseDto {
     private String mensagem;
     private HttpStatus status;
 }

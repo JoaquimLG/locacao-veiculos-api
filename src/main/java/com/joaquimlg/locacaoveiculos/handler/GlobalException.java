@@ -1,6 +1,6 @@
 package com.joaquimlg.locacaoveiculos.handler;
 
-import com.joaquimlg.locacaoveiculos.exception.ErrorResponse;
+import com.joaquimlg.locacaoveiculos.dto.ErrorResponseDto;
 import com.joaquimlg.locacaoveiculos.exception.NaoEncontradoException;
 import com.joaquimlg.locacaoveiculos.exception.OperacaoNaoPermitidaException;
 import com.joaquimlg.locacaoveiculos.exception.PlacaDuplicadaException;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalException {
 
     @ExceptionHandler(PlacaDuplicadaException.class)
-    public ResponseEntity<ErrorResponse> handlerPlacaDuplicadaException(PlacaDuplicadaException ex) {
-        ErrorResponse errorResponse = ErrorResponse.builder()
+    public ResponseEntity<ErrorResponseDto> handlerPlacaDuplicadaException(PlacaDuplicadaException ex) {
+        ErrorResponseDto errorResponse = ErrorResponseDto.builder()
                 .mensagem(ex.getMessage())
                 .status(HttpStatus.CONFLICT)
                 .build();
@@ -23,8 +23,8 @@ public class GlobalException {
     }
 
     @ExceptionHandler(NaoEncontradoException.class)
-    public ResponseEntity<ErrorResponse> handlerNaoEncontradoException(NaoEncontradoException ex) {
-        ErrorResponse errorResponse = ErrorResponse.builder()
+    public ResponseEntity<ErrorResponseDto> handlerNaoEncontradoException(NaoEncontradoException ex) {
+        ErrorResponseDto errorResponse = ErrorResponseDto.builder()
                 .mensagem(ex.getMessage())
                 .status(HttpStatus.NOT_FOUND)
                 .build();
@@ -33,8 +33,8 @@ public class GlobalException {
     }
 
     @ExceptionHandler(OperacaoNaoPermitidaException.class)
-    public ResponseEntity<ErrorResponse> handlerOperacaoNaoPermitidaException(OperacaoNaoPermitidaException ex) {
-        ErrorResponse errorResponse = ErrorResponse.builder()
+    public ResponseEntity<ErrorResponseDto> handlerOperacaoNaoPermitidaException(OperacaoNaoPermitidaException ex) {
+        ErrorResponseDto errorResponse = ErrorResponseDto.builder()
                 .mensagem(ex.getMessage())
                 .status(HttpStatus.CONFLICT)
                 .build();
