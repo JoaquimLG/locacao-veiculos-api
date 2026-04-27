@@ -6,6 +6,7 @@ import com.joaquimlg.locacaoveiculos.database.repository.CarroRepository;
 import com.joaquimlg.locacaoveiculos.dto.CarroCreateDto;
 import com.joaquimlg.locacaoveiculos.dto.CarroUpdateDto;
 import com.joaquimlg.locacaoveiculos.exception.NaoEncontradoException;
+import com.joaquimlg.locacaoveiculos.exception.OperacaoNaoPermitidaException;
 import com.joaquimlg.locacaoveiculos.exception.PlacaDuplicadaException;
 import org.springframework.stereotype.Service;
 
@@ -98,7 +99,7 @@ public class CarroService {
                 return carroRemovido;
             }
 
-            throw new RuntimeException("Não é possível remover carro alugado!");
+            throw new OperacaoNaoPermitidaException("Não é possível remover carro alugado!");
         }
 
         throw new NaoEncontradoException("Veículo não encontrado");

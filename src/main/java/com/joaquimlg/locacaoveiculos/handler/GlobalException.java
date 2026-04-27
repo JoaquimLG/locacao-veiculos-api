@@ -2,6 +2,7 @@ package com.joaquimlg.locacaoveiculos.handler;
 
 import com.joaquimlg.locacaoveiculos.exception.ErrorResponse;
 import com.joaquimlg.locacaoveiculos.exception.NaoEncontradoException;
+import com.joaquimlg.locacaoveiculos.exception.OperacaoNaoPermitidaException;
 import com.joaquimlg.locacaoveiculos.exception.PlacaDuplicadaException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,4 +31,15 @@ public class GlobalException {
 
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(OperacaoNaoPermitidaException.class)
+    public ResponseEntity<ErrorResponse> handlerOperacaoNaoPermitidaException(OperacaoNaoPermitidaException ex) {
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .mensagem(ex.getMessage())
+                .status(HttpStatus.CONFLICT)
+                .build();
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
 }
