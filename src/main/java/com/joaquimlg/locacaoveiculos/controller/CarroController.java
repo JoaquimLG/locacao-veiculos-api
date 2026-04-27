@@ -1,7 +1,7 @@
 package com.joaquimlg.locacaoveiculos.controller;
 
-import com.joaquimlg.locacaoveiculos.database.model.Carro;
-import com.joaquimlg.locacaoveiculos.database.model.StatusCarro;
+import com.joaquimlg.locacaoveiculos.entity.Carro;
+import com.joaquimlg.locacaoveiculos.entity.StatusCarro;
 import com.joaquimlg.locacaoveiculos.dto.CarroCreateDto;
 import com.joaquimlg.locacaoveiculos.dto.CarroUpdateDto;
 import com.joaquimlg.locacaoveiculos.service.CarroService;

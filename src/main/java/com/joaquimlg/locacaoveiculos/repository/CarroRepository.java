@@ -1,7 +1,7 @@
-package com.joaquimlg.locacaoveiculos.database.repository;
+package com.joaquimlg.locacaoveiculos.repository;
 
-import com.joaquimlg.locacaoveiculos.database.model.Carro;
-import com.joaquimlg.locacaoveiculos.database.model.StatusCarro;
+import com.joaquimlg.locacaoveiculos.entity.Carro;
+import com.joaquimlg.locacaoveiculos.entity.StatusCarro;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.joaquimlg.locacaoveiculos.database.model;
+package com.joaquimlg.locacaoveiculos.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

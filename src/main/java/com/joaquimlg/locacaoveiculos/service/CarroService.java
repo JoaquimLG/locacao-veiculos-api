@@ -1,8 +1,8 @@
 package com.joaquimlg.locacaoveiculos.service;
 
-import com.joaquimlg.locacaoveiculos.database.model.Carro;
-import com.joaquimlg.locacaoveiculos.database.model.StatusCarro;
-import com.joaquimlg.locacaoveiculos.database.repository.CarroRepository;
+import com.joaquimlg.locacaoveiculos.entity.Carro;
+import com.joaquimlg.locacaoveiculos.entity.StatusCarro;
+import com.joaquimlg.locacaoveiculos.repository.CarroRepository;
 import com.joaquimlg.locacaoveiculos.dto.CarroCreateDto;
 import com.joaquimlg.locacaoveiculos.dto.CarroUpdateDto;
 import com.joaquimlg.locacaoveiculos.exception.NaoEncontradoException;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static com.joaquimlg.locacaoveiculos.database.model.StatusCarro.DISPONIVEL;
+import static com.joaquimlg.locacaoveiculos.entity.StatusCarro.DISPONIVEL;
 
 @Service
 public class CarroService {
