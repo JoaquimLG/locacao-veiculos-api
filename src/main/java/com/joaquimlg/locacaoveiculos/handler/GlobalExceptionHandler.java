@@ -1,6 +1,7 @@
 package com.joaquimlg.locacaoveiculos.handler;
 
 import com.joaquimlg.locacaoveiculos.dto.ErrorResponseDto;
+import com.joaquimlg.locacaoveiculos.exception.CpfDuplicadoException;
 import com.joaquimlg.locacaoveiculos.exception.NaoEncontradoException;
 import com.joaquimlg.locacaoveiculos.exception.OperacaoNaoPermitidaException;
 import com.joaquimlg.locacaoveiculos.exception.PlacaDuplicadaException;
@@ -34,6 +35,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(OperacaoNaoPermitidaException.class)
     public ResponseEntity<ErrorResponseDto> handlerOperacaoNaoPermitidaException(OperacaoNaoPermitidaException ex) {
+        ErrorResponseDto errorResponse = ErrorResponseDto.builder()
+                .mensagem(ex.getMessage())
+                .status(HttpStatus.CONFLICT)
+                .build();
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(CpfDuplicadoException.class)
+    public ResponseEntity<ErrorResponseDto> handlerCpfDuplicadoException(CpfDuplicadoException ex) {
         ErrorResponseDto errorResponse = ErrorResponseDto.builder()
                 .mensagem(ex.getMessage())
                 .status(HttpStatus.CONFLICT)

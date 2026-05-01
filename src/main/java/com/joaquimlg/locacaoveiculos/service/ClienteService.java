@@ -2,6 +2,7 @@ package com.joaquimlg.locacaoveiculos.service;
 
 import com.joaquimlg.locacaoveiculos.dto.ClienteCreateDto;
 import com.joaquimlg.locacaoveiculos.entity.Cliente;
+import com.joaquimlg.locacaoveiculos.exception.CpfDuplicadoException;
 import com.joaquimlg.locacaoveiculos.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +21,22 @@ public class ClienteService {
     }
 
     public Cliente cadastrarCliente(ClienteCreateDto cliente) {
-        Cliente clienteNovo = Cliente.builder()
-                .nome(cliente.getNome())
-                .cpf(cliente.getEmail())
-                .email(cliente.getEmail())
-                .build();
+        boolean existeCpf = existeCpfCadastrado(cliente.getCpf());
 
-        return clienteRepository.save(clienteNovo);
+        if (!existeCpf) {
+            Cliente clienteNovo = Cliente.builder()
+                    .nome(cliente.getNome())
+                    .cpf(cliente.getCpf())
+                    .email(cliente.getEmail())
+                    .build();
+
+            return clienteRepository.save(clienteNovo);
+        }
+
+        throw new CpfDuplicadoException("Cpf já está cadastrado");
+    }
+
+    private boolean existeCpfCadastrado(String cpf) {
+        return clienteRepository.existsByCpf(cpf);
     }
 }
