@@ -1,10 +1,11 @@
 package com.joaquimlg.locacaoveiculos.controller;
 
+import com.joaquimlg.locacaoveiculos.dto.ClienteCreateDto;
 import com.joaquimlg.locacaoveiculos.entity.Cliente;
 import com.joaquimlg.locacaoveiculos.service.ClienteService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,4 +23,10 @@ public class ClienteController {
         return clienteService.listarClientes();
     }
 
+    @PostMapping
+    public ResponseEntity<Cliente> cadastrarCliente(@RequestBody ClienteCreateDto cliente) {
+        Cliente clienteCriado = clienteService.cadastrarCliente(cliente);
+
+        return new ResponseEntity<>(clienteCriado, HttpStatus.CREATED);
+    }
 }
