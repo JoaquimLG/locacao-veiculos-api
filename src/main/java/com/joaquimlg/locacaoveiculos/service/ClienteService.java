@@ -34,22 +34,32 @@ public class ClienteService {
     }
 
     public Cliente cadastrarCliente(ClienteCreateDto cliente) {
+        //Verifica se dados já foram cadastrados
+
         boolean existeCpf = existeCpfCadastrado(cliente.getCpf());
-
-        if (!existeCpf) {
-            Cliente clienteNovo = Cliente.builder()
-                    .nome(cliente.getNome())
-                    .cpf(cliente.getCpf())
-                    .email(cliente.getEmail())
-                    .build();
-
-            return clienteRepository.save(clienteNovo);
+        if (existeCpf) {
+            throw new CampoDuplicadoException("Cpf já está cadastrado");
         }
 
-        throw new CampoDuplicadoException("Cpf já está cadastrado");
+        boolean existeEmail = existeEmailCadastrado(cliente.getEmail());
+        if (existeEmail) {
+            throw new CampoDuplicadoException("Email já está cadastrado");
+        }
+
+        Cliente clienteNovo = Cliente.builder()
+                .nome(cliente.getNome())
+                .cpf(cliente.getCpf())
+                .email(cliente.getEmail())
+                .build();
+
+        return clienteRepository.save(clienteNovo);
     }
 
     private boolean existeCpfCadastrado(String cpf) {
         return clienteRepository.existsByCpf(cpf);
+    }
+
+    private boolean existeEmailCadastrado(String email) {
+        return clienteRepository.existsByEmail(email);
     }
 }
