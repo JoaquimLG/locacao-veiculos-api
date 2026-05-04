@@ -1,6 +1,7 @@
 package com.joaquimlg.locacaoveiculos.controller;
 
 import com.joaquimlg.locacaoveiculos.dto.ClienteCreateDto;
+import com.joaquimlg.locacaoveiculos.dto.ClienteSearchDto;
 import com.joaquimlg.locacaoveiculos.entity.Cliente;
 import com.joaquimlg.locacaoveiculos.service.ClienteService;
 import org.springframework.http.HttpStatus;
@@ -28,5 +29,12 @@ public class ClienteController {
         Cliente clienteCriado = clienteService.cadastrarCliente(cliente);
 
         return new ResponseEntity<>(clienteCriado, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/busca")
+    public ResponseEntity<Cliente> buscarClienteCpf(@RequestBody ClienteSearchDto clienteBusca) {
+        Cliente clienteBuscado = clienteService.buscarClienteCpf(clienteBusca);
+
+        return new ResponseEntity<>(clienteBuscado, HttpStatus.OK);
     }
 }
