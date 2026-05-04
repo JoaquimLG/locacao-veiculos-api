@@ -1,10 +1,9 @@
 package com.joaquimlg.locacaoveiculos.handler;
 
 import com.joaquimlg.locacaoveiculos.dto.ErrorResponseDto;
-import com.joaquimlg.locacaoveiculos.exception.CpfDuplicadoException;
 import com.joaquimlg.locacaoveiculos.exception.NaoEncontradoException;
 import com.joaquimlg.locacaoveiculos.exception.OperacaoNaoPermitidaException;
-import com.joaquimlg.locacaoveiculos.exception.PlacaDuplicadaException;
+import com.joaquimlg.locacaoveiculos.exception.CampoDuplicadoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,8 +12,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(PlacaDuplicadaException.class)
-    public ResponseEntity<ErrorResponseDto> handlerPlacaDuplicadaException(PlacaDuplicadaException ex) {
+    @ExceptionHandler(CampoDuplicadoException.class)
+    public ResponseEntity<ErrorResponseDto> handlerCampoDuplicadoException(CampoDuplicadoException ex) {
         ErrorResponseDto errorResponse = ErrorResponseDto.builder()
                 .mensagem(ex.getMessage())
                 .status(HttpStatus.CONFLICT)
@@ -35,16 +34,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(OperacaoNaoPermitidaException.class)
     public ResponseEntity<ErrorResponseDto> handlerOperacaoNaoPermitidaException(OperacaoNaoPermitidaException ex) {
-        ErrorResponseDto errorResponse = ErrorResponseDto.builder()
-                .mensagem(ex.getMessage())
-                .status(HttpStatus.CONFLICT)
-                .build();
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
-    }
-
-    @ExceptionHandler(CpfDuplicadoException.class)
-    public ResponseEntity<ErrorResponseDto> handlerCpfDuplicadoException(CpfDuplicadoException ex) {
         ErrorResponseDto errorResponse = ErrorResponseDto.builder()
                 .mensagem(ex.getMessage())
                 .status(HttpStatus.CONFLICT)

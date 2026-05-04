@@ -3,7 +3,7 @@ package com.joaquimlg.locacaoveiculos.service;
 import com.joaquimlg.locacaoveiculos.dto.ClienteCreateDto;
 import com.joaquimlg.locacaoveiculos.dto.ClienteSearchDto;
 import com.joaquimlg.locacaoveiculos.entity.Cliente;
-import com.joaquimlg.locacaoveiculos.exception.CpfDuplicadoException;
+import com.joaquimlg.locacaoveiculos.exception.CampoDuplicadoException;
 import com.joaquimlg.locacaoveiculos.exception.NaoEncontradoException;
 import com.joaquimlg.locacaoveiculos.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
@@ -46,7 +46,7 @@ public class ClienteService {
             return clienteRepository.save(clienteNovo);
         }
 
-        throw new CpfDuplicadoException("Cpf já está cadastrado");
+        throw new CampoDuplicadoException("Cpf já está cadastrado");
     }
 
     private boolean existeCpfCadastrado(String cpf) {
