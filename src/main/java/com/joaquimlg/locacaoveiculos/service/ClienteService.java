@@ -2,6 +2,7 @@ package com.joaquimlg.locacaoveiculos.service;
 
 import com.joaquimlg.locacaoveiculos.dto.ClienteCreateDto;
 import com.joaquimlg.locacaoveiculos.dto.ClienteSearchDto;
+import com.joaquimlg.locacaoveiculos.dto.ClienteUpdateDto;
 import com.joaquimlg.locacaoveiculos.entity.Cliente;
 import com.joaquimlg.locacaoveiculos.exception.CampoDuplicadoException;
 import com.joaquimlg.locacaoveiculos.exception.NaoEncontradoException;
@@ -53,6 +54,28 @@ public class ClienteService {
                 .build();
 
         return clienteRepository.save(clienteNovo);
+    }
+
+    public Cliente atualizarCliente(Long id, ClienteUpdateDto clienteAtualizacoes) {
+        Optional<Cliente> clienteBuscadoId = clienteRepository.findById(id);
+
+        if (clienteBuscadoId.isPresent()) {
+            Cliente clienteAtualizado = clienteBuscadoId.get();
+
+            if (clienteAtualizacoes.getNome() != null) {
+                clienteAtualizado.setNome(clienteAtualizacoes.getNome());
+            }
+
+            if (clienteAtualizacoes.getEmail() != null) {
+                clienteAtualizado.setEmail(clienteAtualizacoes.getEmail());
+            }
+
+            clienteRepository.save(clienteAtualizado);
+
+            return clienteAtualizado;
+        }
+
+        throw new NaoEncontradoException("Cliente não encontrado");
     }
 
     private boolean existeCpfCadastrado(String cpf) {

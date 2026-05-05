@@ -1,9 +1,13 @@
 package com.joaquimlg.locacaoveiculos.controller;
 
+import com.joaquimlg.locacaoveiculos.dto.CarroUpdateDto;
 import com.joaquimlg.locacaoveiculos.dto.ClienteCreateDto;
 import com.joaquimlg.locacaoveiculos.dto.ClienteSearchDto;
+import com.joaquimlg.locacaoveiculos.dto.ClienteUpdateDto;
+import com.joaquimlg.locacaoveiculos.entity.Carro;
 import com.joaquimlg.locacaoveiculos.entity.Cliente;
 import com.joaquimlg.locacaoveiculos.service.ClienteService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,5 +40,12 @@ public class ClienteController {
         Cliente clienteBuscado = clienteService.buscarClienteCpf(clienteBusca);
 
         return new ResponseEntity<>(clienteBuscado, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Cliente> atualizarParcialCarro (@PathVariable Long id, @RequestBody ClienteUpdateDto cliente) {
+        Cliente clienteAtualizado = clienteService.atualizarCliente(id, cliente);
+
+        return new ResponseEntity<>(clienteAtualizado, HttpStatus.OK);
     }
 }
