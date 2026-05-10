@@ -67,6 +67,19 @@ public class ClienteService {
             }
 
             if (clienteAtualizacoes.getEmail() != null) {
+
+                //Compara o novo email com o que já está salvo
+                boolean emailMudou = !clienteAtualizado
+                        .getEmail()
+                        .equals(clienteAtualizacoes.getEmail());
+
+
+                boolean existeEmail = existeEmailCadastrado(clienteAtualizacoes.getEmail());
+
+                if (emailMudou && existeEmail) {
+                    throw new CampoDuplicadoException("Email já está cadastrado");
+                }
+
                 clienteAtualizado.setEmail(clienteAtualizacoes.getEmail());
             }
 

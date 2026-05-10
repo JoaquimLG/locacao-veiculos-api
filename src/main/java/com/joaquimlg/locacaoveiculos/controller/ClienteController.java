@@ -1,10 +1,8 @@
 package com.joaquimlg.locacaoveiculos.controller;
 
-import com.joaquimlg.locacaoveiculos.dto.CarroUpdateDto;
 import com.joaquimlg.locacaoveiculos.dto.ClienteCreateDto;
 import com.joaquimlg.locacaoveiculos.dto.ClienteSearchDto;
 import com.joaquimlg.locacaoveiculos.dto.ClienteUpdateDto;
-import com.joaquimlg.locacaoveiculos.entity.Carro;
 import com.joaquimlg.locacaoveiculos.entity.Cliente;
 import com.joaquimlg.locacaoveiculos.service.ClienteService;
 import jakarta.validation.Valid;
@@ -29,7 +27,7 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> cadastrarCliente(@RequestBody ClienteCreateDto cliente) {
+    public ResponseEntity<Cliente> cadastrarCliente(@RequestBody @Valid ClienteCreateDto cliente) {
         Cliente clienteCriado = clienteService.cadastrarCliente(cliente);
 
         return new ResponseEntity<>(clienteCriado, HttpStatus.CREATED);
@@ -43,7 +41,7 @@ public class ClienteController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Cliente> atualizarParcialCarro (@PathVariable Long id, @RequestBody ClienteUpdateDto cliente) {
+    public ResponseEntity<Cliente> atualizarParcialCliente(@PathVariable Long id, @RequestBody ClienteUpdateDto cliente) {
         Cliente clienteAtualizado = clienteService.atualizarCliente(id, cliente);
 
         return new ResponseEntity<>(clienteAtualizado, HttpStatus.OK);
