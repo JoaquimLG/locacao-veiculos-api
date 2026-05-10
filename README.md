@@ -43,9 +43,14 @@ Este projeto foi desenvolvido com foco em:
   - MANUTENCAO  
   - INATIVO  
 
-### Clientes (Em desenvolvimento)
+### Clientes (Implementado)
 
+- Cadastro de clientes
 - Listagem de clientes  
+- Busca de cliente por CPF
+- Atualização parcial de cliente
+- Validação de email único
+- Validação de CPF com Hibernate Validator 
 
 ---
 
@@ -55,6 +60,8 @@ Este projeto foi desenvolvido com foco em:
 - Não é permitido inativar veículos que estejam alugados  
 - Veículos são cadastrados inicialmente como DISPONIVEL  
 - Veículos inativos não aparecem na listagem padrão  
+- Não é permitido cadastrar clientes com CPF duplicado
+- Não é permitido cadastrar cleintes com email duplicado
 
 ---
 
@@ -90,7 +97,7 @@ com.joaquimlg.locacaoveiculos
 
 ## Tratamento de Exceções
 
-- PlacaDuplicadaException → 409 CONFLICT  
+- CampoDuplicadoException → 409 CONFLICT  
 - NaoEncontradoException → 404 NOT FOUND  
 - OperacaoNaoPermitidaException → 409 CONFLICT  
 
@@ -111,6 +118,7 @@ Formato de resposta:
 - Spring Boot  
 - Spring Web  
 - Spring Data JPA  
+- Hibernate Validator
 - Jakarta Validation  
 - Lombok  
 - Maven  
@@ -139,6 +147,9 @@ Não há persistência de dados após reinicialização da aplicação.
 ### Clientes
 
 - GET /clientes  
+- POST /clientes
+- POST /cliente/busca
+- PATCH /clientes/{id}
 
 ---
 
@@ -173,8 +184,8 @@ http://localhost:8080
 ## Status do Projeto
 
 - Módulo de veículos: concluído  
-- Módulo de clientes: em desenvolvimento  
-- Módulo de locação: planejado  
+- Módulo de clientes: concluído  
+- Módulo de locação: em desenvolvimento
 
 ---
 
