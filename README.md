@@ -52,6 +52,17 @@ Este projeto foi desenvolvido com foco em:
 - Validação de email único
 - Validação de CPF com Hibernate Validator 
 
+
+
+### Locações (Implementado)
+
+- Realização de locação de veículos
+- Encerramento de locações
+- Listagem de locações
+- Busca de locação por ID
+- Cálculo automático do valor da locação
+- Alteração automática do status do veículo durante a locação
+
 ---
 
 ## Regras de Negócio
@@ -62,6 +73,12 @@ Este projeto foi desenvolvido com foco em:
 - Veículos inativos não aparecem na listagem padrão  
 - Não é permitido cadastrar clientes com CPF duplicado
 - Não é permitido cadastrar cleintes com email duplicado
+- Apenas veículos com status DISPONIVEL podem ser alugados
+- A data final não pode ser anterior à data inicial
+- Toda locação possui cobrança mínima de 1 diária
+- Ao iniciar uma locação o veículo passa para ALUGADO
+- Ao encerrar uma locação o veículo retorna para DISPONIVEL
+- Não é possível encerrar uma locação já encerrada
 
 ---
 
@@ -151,6 +168,13 @@ Não há persistência de dados após reinicialização da aplicação.
 - POST /cliente/busca
 - PATCH /clientes/{id}
 
+### Locações
+
+- GET /locacoes
+- GET /locacoes/{id}
+- POST /locacoes
+- PATCH /locacoes/{id}/encerrar
+
 ---
 
 ## Como Executar o Projeto
@@ -185,7 +209,7 @@ http://localhost:8080
 
 - Módulo de veículos: concluído  
 - Módulo de clientes: concluído  
-- Módulo de locação: em desenvolvimento
+- Módulo de locação: concluído
 
 ---
 
