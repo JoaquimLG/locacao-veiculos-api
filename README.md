@@ -10,7 +10,6 @@ Este projeto tem como objetivo principal o **aprendizado e prática de desenvolv
 
 A aplicação permite o gerenciamento de veículos, incluindo cadastro, consulta, atualização e controle de disponibilidade.
 
-O sistema está em evolução e será expandido para contemplar o fluxo completo de locação, incluindo clientes e aluguéis.
 
 ---
 
@@ -29,7 +28,7 @@ Este projeto foi desenvolvido com foco em:
 
 ## Funcionalidades
 
-### Veículos (Implementado)
+### Veículos
 
 - Cadastro de veículos  
 - Listagem de veículos (com filtro por status)  
@@ -43,7 +42,7 @@ Este projeto foi desenvolvido com foco em:
   - MANUTENCAO  
   - INATIVO  
 
-### Clientes (Implementado)
+### Clientes
 
 - Cadastro de clientes
 - Listagem de clientes  
@@ -54,7 +53,7 @@ Este projeto foi desenvolvido com foco em:
 
 
 
-### Locações (Implementado)
+### Locações
 
 - Realização de locação de veículos
 - Encerramento de locações
@@ -205,13 +204,6 @@ http://localhost:8080
 
 ---
 
-## Status do Projeto
-
-- Módulo de veículos: concluído  
-- Módulo de clientes: concluído  
-- Módulo de locação: concluído
-
----
 
 ## Autor
 
