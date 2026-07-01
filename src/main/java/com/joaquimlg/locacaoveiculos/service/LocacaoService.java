@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class LocacaoService {
@@ -33,6 +32,11 @@ public class LocacaoService {
 
     public List<Locacao> listarLocacoes() {
         return locacaoRepository.findAll();
+    }
+
+    public Locacao buscarLocacaoPorId(Long id) {
+        return locacaoRepository.findById(id)
+                .orElseThrow(() -> new NaoEncontradoException("Locação não encontrada com o ID: " + id));
     }
 
     @Transactional
