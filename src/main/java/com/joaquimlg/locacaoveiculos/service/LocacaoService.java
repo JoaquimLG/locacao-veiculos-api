@@ -71,4 +71,21 @@ public class LocacaoService {
         return locacaoRepository.save(locacao);
     }
 
+    @Transactional
+    public Locacao encerrarLocacao(Long id) {
+        Locacao locacao = locacaoRepository.findById(id)
+                .orElseThrow(() -> new NaoEncontradoException("Locação não encontrada"));
+
+        if (!locacao.isAtiva()) {
+            throw new OperacaoNaoPermitidaException("Locação não está ativa");
+        }
+
+        locacao.setAtiva(false);
+
+        Carro carro = locacao.getCarro();
+        carro.setStatus(StatusCarro.DISPONIVEL);
+        carroRepository.save(carro);
+
+        return locacaoRepository.save(locacao);
+    }
 }
